@@ -1,0 +1,88 @@
+<script src="/admin/change.js"></script>
+<div class="layuimini-container layuimini-page-anim">
+    <div class="layuimini-main">
+        <div class="layui-fluid">
+            <div class="layui-card">
+                <div class="layui-card-body" style="padding-top: 40px;">
+                    <div class="layui-carousel" id="stepForm" lay-filter="stepForm" style="margin: 0 auto;">
+                        <div carousel-item>
+                            <div>
+                                <form class="layui-form" style="margin: 0 auto;max-width: 460px;padding-top: 40px;">
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label" style="width: auto;">用户名确认</label>
+                                        <div class="layui-input-block">
+                                            <input id="username" name="username" type="text" class="layui-input"
+                                                required />
+                                        </div>
+                                    </div>
+                                    <span id="change"></span>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">新密码</label>
+                                        <div class="layui-input-block">
+                                            <input type="password" name="password" placeholder="请输入新密码"
+                                                class="layui-input" required />
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label" style="width: auto;">确认新密码</label>
+                                        <div class="layui-input-block">
+                                            <input type="password" name="password2" placeholder="请重复新密码"
+                                                class="layui-input" required />
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <div class="layui-input-block">
+                                            <button class="layui-btn" lay-submit lay-filter="formStep">
+                                                &emsp;下一步&emsp;
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div id="check">
+                                <form class="layui-form" style="margin: 0 auto;max-width: 620px;padding-top: 40px;">
+                                    <h3>说明：</h3><br>
+                                    <h4>短信验证码的发送上限为每分钟1条；邮箱验证码的频率上限为十秒钟一条。</h4>
+                                    <hr>
+                                    <span id="email-check">
+                                    </span>
+                                    <span id="phone-check">
+                                    </span>
+                                    <div class="layui-form-item">
+                                        <div class="layui-input-block">
+                                            <button class="layui-btn" lay-submit lay-filter="formStep2">
+                                                &emsp;下一步&emsp;
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div id="success">
+                                <div style="text-align: center;margin-top: 90px;">
+                                    <i id="end-icon" class="layui-icon layui-circle layui-icon-ok"
+                                        style="color: white;font-size:30px;font-weight:bold;background: #52C41A;padding: 20px;line-height: 80px;"></i>
+                                    <div id="word"
+                                        style="font-size: 24px;color: #333;font-weight: 500;margin-top: 30px;">
+                                        修改成功
+                                    </div>
+                                    <div id="tip" style="font-size: 14px;color: #666;margin-top: 20px;">
+                                        当前账户Session已被清除，请点击下方按钮重新登陆</div>
+                                </div>
+                                <div style="text-align: center;margin-top: 50px;">
+                                    <button class="layui-btn next">返回首页/登录</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div style="color: #666;margin-top: 30px;margin-bottom: 40px;padding-left: 30px;">
+                        <h3>说明</h3><br>
+                        <h4>修改密码功能</h4>
+                        <p>如果关于邮件使用功能以及使用手机号进行的校验的内容，可在注册时进行开启或下载官方脚本进行开启关闭，具体请查看官方。</p>
+                        <p>SELECT * FROM TABLENAME;</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

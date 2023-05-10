@@ -1,0 +1,63 @@
+<style>
+    .layui-form-item .layui-input-company {
+        width: auto;
+        padding-right: 10px;
+        line-height: 38px;
+    }
+
+    .layui-form-label {
+        width: auto;
+    }
+</style>
+<script src="/admin/base.js"></script>
+
+<div class="layuimini-container layuimini-page-anim">
+    <div class="layuimini-main">
+        <form>
+            <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+                <legend>管理员用户中心</legend>
+            </fieldset>
+            <!-- <div class="layui-form layuimini-form"> -->
+            <div class="layui-form-item">
+                <label class="layui-form-label required"><strong
+                        style="color: red;font-size: large;">*</strong>用户名</label>
+                <div class="layui-input-block">
+                    <input id="username_" type="text" name="username" lay-verify="required" lay-reqtext="用户名不能为空"
+                        placeholder="请输用户名" class="layui-input">
+                    <tip>填写当前账户的登录用用户名;<span style="color: red;">请勿随意修改，该数据可作为登陆凭证使用。</span></tip>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label required">联系方式</label>
+                <div class="layui-input-block">
+                    <input id="phone" type="text" name="phone" lay-verify="" lay-reqtext="请输入联系方式" placeholder="请输入联系方式"
+                        class="layui-input">
+                    <tip>填写当前账户负责人的联系方式;<span id="phone-tip" style="color: red;">当前版本暂未开通短信验证码功能，敬请期待。</span></tip>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label required">电子邮箱</label>
+                <div class="layui-input-block">
+                    <input id="email" type="text" name="email" lay-verify="" lay-reqtext="请输入电子邮箱" placeholder="请输入电子邮箱"
+                        class="layui-input">
+                    <tip>填写当前账户负责人的联系方式;<span id="email-tip" style="color: red;"></span></tip>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label required">用户备注</label>
+                <div class="layui-input-block">
+                    <textarea id="remark" name="remark" class="layui-textarea" placeholder="可以在这里放飞自我(bushi)
+可以在这里写一下关于当前账户的操作及相关的注意事项之类的"></textarea>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button id="user-info-setting-submit" class="layui-btn" type="button" lay-submit=""
+                        lay-filter="article-submit">修改提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">清空</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
