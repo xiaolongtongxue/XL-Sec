@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>XL SEC</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/lib/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/lib/font-awesome-4.7.0/css/font-awesome.min.css" media="all">
+    <link rel="stylesheet" href="/css/layuimini.css?v=2.0.1" media="all">
+    <link rel="stylesheet" href="/css/themes/default.css" media="all">
+    <link rel="stylesheet" href="/css/public.css" media="all">
+    <link rel="stylesheet" href="/js/lay-module/step-lay/step.css" media="all">
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+    <script src="/js/myconfig.js"></script>
+    <style id="layuimini-bg-color"></style>
+    <script src="/lib/jquery/jquery.min.js"></script>
+    <script src="/lib/hash.min.js"></script>
+    <script src="/js/util_function_extend/check_error_back.js"></script>
+    <script src="/js/util_function_extend/back_login.js"></script>
+    <script src="/js/util_function_extend/for_element.js"></script>
+    <script src="/js/util_function_extend/check.js"></script>
+    <style type="text/css">
+        .dark-mode {
+            filter: invert(100%) hue-rotate(180deg) brightness(115%) contrast(95%) !important;
+        }
+    </style>
+</head>
+
+<body class="layui-layout-body layuimini-all">
+    <div class="layui-layout layui-layout-admin">
+        <div class="layui-header header">
+            <div class="layui-logo layuimini-logo layuimini-back-home"></div>
+            <div class="layuimini-header-content">
+                <a>
+                    <div class="layuimini-tool"><i title="open" class="fa fa-outdent" data-side-fold="1"></i></div>
+                </a>
+                <ul
+                    class="layui-nav layui-layout-left layuimini-header-menu layuimini-menu-header-pc layuimini-pc-show">
+                </ul>
+                <ul class="layui-nav layui-layout-right">
+                    <li class="layui-nav-item" lay-unselect>
+                        <a href="javascript:;" data-refresh="刷新"><i class="fa fa-refresh"></i></a>
+                    </li>
+                    <li class="layui-nav-item mobile layui-hide-xs" lay-unselect>
+                        <a href="javascript:;" data-check-screen="full"><i class="fa fa-arrows-alt"></i></a>
+                    </li>
+                    <li class="layui-nav-item layuimini-setting" style="text-align: center;">
+                        <a href="javascript:;">当前用户：<span id="username"></span></a>
+                        <dl class="layui-nav-child">
+                            <dd>
+                                <a href="javascript:;" layuimini-content-href="/admin/base-info.html" data-title="基本资料"
+                                    data-icon="fa fa-gears">基本资料</a>
+                            </dd>
+                            <dd>
+                                <a href="javascript:;" layuimini-content-href="/admin/change-passwd.html"
+                                    data-title="修改密码" data-icon="fa fa-gears">修改密码</a>
+                            </dd>
+                            <dd>
+                                <hr>
+                            </dd>
+                            <dd><a href="javascript:;" id="login-out">退出登录</a></dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item layuimini-select-bgcolor" lay-unselect>
+                        <a href="javascript:;" data-bgcolor="配色方案"><i class="fa fa-ellipsis-v"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="layui-side layui-bg-black layuimini-menu-left"></div>
+        <div class="layuimini-loader">
+            <div class="layuimini-loader-inner"></div>
+        </div>
+        <div class="layuimini-site-mobile"><i class="layui-icon"></i></div>
+        <div class="layui-body">
+            <div class="layui-card layuimini-page-header layui-hide">
+                <div class="layui-breadcrumb layuimini-page-title">
+                    <a lay-href="" href="/">主页</a><span lay-separator="">/</span>
+                    <a><cite>常规管理</cite></a><span lay-separator="">/</span>
+                    <a><cite>系统设置</cite></a>
+                </div>
+            </div>
+            <div class="layuimini-content-page"></div>
+        </div>
+    </div>
+    <script src="/lib/layui/layui.js" charset="utf-8"></script>
+    <script src="/js/lay-config.js" charset="utf-8"></script>
+    <script src="/js/index.js" charset="utf-8"></script>
+</body>
+
+</html>
