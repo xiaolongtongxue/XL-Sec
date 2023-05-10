@@ -1,0 +1,23 @@
+<style>
+    .layui-btn:not(.layui-btn-lg):not(.layui-btn-sm):not(.layui-btn-xs) {
+        height: 36px;
+        line-height: 36px;
+        padding: 0 8px;
+    }
+</style>
+<script src="/js/for_page/log-manager/attack-log.js"></script>
+
+<div class="layuimini-container layuimini-page-anim">
+    <div class="layuimini-main">
+        <script type="text/html" id="toolbar">
+            <div class="layui-btn-container">
+                <div class="layui-input-inline">
+                    <h3>攻击行为检测 &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</h3>
+                </div>
+                <button class="layui-btn layui-btn-normal" lay-event="refresh"> 刷新 </button>
+                <button class="layui-btn layui-btn-danger" lay-event="dels"> 删除选中 </button>
+            </div>
+        </script>
+        <table class="layui-hide" id="table-attack-log" lay-filter="table-attack-log"></table>
+    </div>
+</div>

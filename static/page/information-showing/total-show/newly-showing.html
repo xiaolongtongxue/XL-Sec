@@ -1,0 +1,95 @@
+<script src="/js/for_page/information-welcome/total-show/nearly-show.js"></script>
+<style>
+    .layui-form-label {
+        width: 8ex;
+    }
+</style>
+<div class="layuimini-container layuimini-page-anim">
+    <div class="layuimini-main">
+        <fieldset class="table-search-fieldset">
+            <legend>请依次确定您的查询条件</legend>
+            <div>
+                <form class="layui-form layui-form-pane">
+                    <div class="layui-inline">
+                        <label class="layui-form-label" style="width: 60px;">时间</label>
+                        <div class="layui-input-inline" style="width: 322px;">
+                            <input type="text" id="time" name="time" class="layui-input">
+                        </div>
+                    </div>
+
+                    <div class="layui-inline">
+                        <label class="layui-form-label" style="width: 80px;">IP地址</label>
+                        <div class="layui-input-inline" style="width: 110px;">
+                            <input type="text" name="ip" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label" style="width: 95px;">处理结果</label>
+                        <div class="layui-input-inline" style="width: 110px;">
+                            <select name="end">
+                                <option value="None" selected>-不限制-</option>
+                                <option value="Ban">封禁</option>
+                                <option value="Intercept">拦截</option>
+                                <option value="Warn">警告</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label" style="width: 110px;">受影响站点</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="webname" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label" style="width: 90px;">事故等级</label>
+                        <div class="layui-input-inline" style="width: 80px;">
+                            <select name="level">
+                                <option value="None" selected>-不限-</option>
+                                <option value="High">高</option>
+                                <option value="Mid">中</option>
+                                <option value="Low">低</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label" style="width: 80px;">拦截器</label>
+                        <div class="layui-input-inline layui-form" style="width: 80px;">
+                            <select name="get" id="interceptor">
+                                <option value="None" selected>-不限-</option>
+                            </select>
+                        </div>
+                    </div>
+                    <span id="extension"><br><button class="layui-btn layui-btn-warm"
+                            id="extend-click">更多选项</button></span>
+                    <div class="layui-inline">
+                        <button type="submit" class="layui-btn layui-btn-primary" lay-submit
+                            lay-filter="data-search-btn"><i class="layui-icon"></i> 搜 索</button>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label" style="width: 90px;">定时刷新</label>
+                        <div class="layui-input-inline" style="width: 80px;">
+                            <select lay-filter="refresh-timing">
+                                <option value="0" selected>关</option>
+                                <option value="5">5秒</option>
+                                <option value="20">20秒</option>
+                                <option value="60">1分</option>
+                                <option value="300">5分</option>
+                                <option value="600">10分</option>
+                                <option value="1800">30分</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </fieldset>
+
+        <script type="text/html" id="toolbar">
+            <div class="layui-btn-container">
+                <!-- <button class="layui-btn layui-btn-normal layui-btn-sm data-add-btn" lay-event="error-report"> 标记误报 </button> -->
+                <button class="layui-btn layui-btn-sm layui-btn-danger data-delete-btn" lay-event="delete-info"> 删除选中记录 </button>
+            </div>
+        </script>
+        <table class="layui-hide" id="nearly-data-table" lay-filter="currentTableFilter"></table>
+    </div>
+</div>

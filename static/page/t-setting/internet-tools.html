@@ -1,0 +1,142 @@
+<style>
+    .layuimini-main {
+        height: 105ex !important;
+    }
+
+    .layui-form-item .layui-input-company {
+        width: auto;
+        padding-right: 10px;
+        line-height: 38px;
+    }
+
+    .layui-form-item {
+        font-size: 17px;
+    }
+
+    textarea {
+        resize: none !important;
+        height: 70ex !important;
+        overflow-y: scroll !important;
+    }
+
+    h2 {
+        font-size: 4ex;
+        margin-left: 5%;
+        margin-bottom: 2%;
+    }
+
+    h3 {
+        font-size: 3ex;
+        color: green;
+        margin-left: 3%;
+    }
+</style>
+<script src="/js/for_page/t-setting/net-tools.js"></script>
+
+<div class="layuimini-container layuimini-page-anim">
+    <div class="layuimini-main">
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+            <legend>网络快速检查工具</legend>
+        </fieldset>
+        <h3>请注意，该界面仅为临时测试用，所有命令执行范围仅为面板容器，真正排查问题请上机。</h3>
+        <hr>
+        <div class="layui-col-md4">
+            <form id="net-check-ping">
+                <h2>PING检测</h2>
+                <div class="layui-form-item">
+                    <label class="layui-form-label required">ping</label>
+                    <div class="layui-input-block">
+                        <input id="check-ping" type="text" name="check-ping" lay-verify="required"
+                            lay-reqtext="PING的对象不能为空" placeholder="请输入域名或IP地址" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button id="net-check-ping-submit" class="layui-btn layui-btn-sm sumit-button" type="button"
+                            lay-submit="" lay-filter="article-submit">立即提交</button>
+                        <button type="reset" class="layui-btn layui-btn-sm layui-btn-primary">重置</button>
+                    </div>
+                </div>
+            </form>
+
+            <form id="net-check-curl">
+                <h2>cURL检测</h2>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">curl</label>
+                    <div class="layui-input-block">
+                        <input id="check-curl" type="text" name="check-curl" lay-verify="required"
+                            lay-reqtext="请输入一段URL链接" placeholder="请输入一段完整的URL" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button id="net-check-curl-submit" class="layui-btn layui-btn-sm sumit-button" type="button"
+                            lay-submit="" lay-filter="article-submit">立即提交</button>
+                        <button type="reset" class="layui-btn layui-btn-sm layui-btn-primary">重置</button>
+                    </div>
+                </div>
+            </form>
+
+            <!-- <form id="net-check-nslookup">
+                <h2>nslookup检测</h2>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">nslookup</label>
+                    <div class="layui-input-block">
+                        <input id="check-nslookup" type="text" name="check-nslookup" lay-verify="required" lay-reqtext="请输入一个完整的域名" placeholder="请输入一个完整的域名" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button id="net-check-nslookup-submit" class="layui-btn layui-btn-sm sumit-button" type="button" lay-submit="" lay-filter="article-submit">立即提交</button>
+                        <button type="reset" class="layui-btn layui-btn-sm layui-btn-primary">重置</button>
+                    </div>
+                </div>
+            </form> -->
+
+            <form id="net-check-tracert">
+                <h2>Tracert检测</h2>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">tracert</label>
+                    <div class="layui-input-block">
+                        <input id="check-tracert" type="text" name="check-tracert" lay-verify="required"
+                            lay-reqtext="请输入一个完整的探测地址" placeholder="请输入一个完整的HOST地址" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button id="net-check-tracert-submit" class="layui-btn layui-btn-sm sumit-button" type="button"
+                            lay-submit="" lay-filter="article-submit">立即提交</button>
+                        <button type="reset" class="layui-btn layui-btn-sm layui-btn-primary">重置</button>
+                    </div>
+                </div>
+            </form>
+
+            <form id="net-check-netstat">
+                <h2>Netstat检测</h2>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">netstat</label>
+                    <div class="layui-input-block">
+                        <input id="check-netstat" type="text" name="check-netstat" lay-verify="required"
+                            lay-reqtext="请输入netstat的后接参数" placeholder="请输入一段完整的ntlp指令参数，比如：‘-ntlp’" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button id="net-check-netstat-submit" class="layui-btn layui-btn-sm sumit-button" type="button"
+                            lay-submit="" lay-filter="article-submit">立即提交</button>
+                        <button type="reset" class="layui-btn layui-btn-sm layui-btn-primary">重置</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="layui-col-md8 layui-col-md">
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">结果显示</label>
+                <div class="layui-input-block">
+                    <textarea id="return-check-word" placeholder="稍后会将运行结果打印在这里" readonly="readonly"
+                        class="layui-textarea"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

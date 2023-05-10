@@ -1,0 +1,33 @@
+<head>
+    <style>
+        .layui-form-item .layui-input-company {
+            width: auto;
+            padding-right: 10px;
+            line-height: 38px;
+        }
+
+        .layui-textarea {
+            resize: none !important;
+            height: 90% !important;
+        }
+    </style>
+    <script src="/lib/jquery/jquery.min.js"></script>
+    <link rel="stylesheet" href="/lib/layui/css/layui.css" media="all">
+    <script src="/js/util_function_extend/get_vars.js"></script>
+    <script src="/lib/layui/layui.js"></script>
+    <script src="/lib/layui/layui.all.js"></script>
+    <script src="/js/myconfig.js"></script>
+    <script src="/js/for_page/log-manager/information/info-attack-http.js"></script>
+</head>
+
+<body id="body">
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+        <legend>HTTP报文预览</legend>
+    </fieldset>
+    <div style="text-align: center;">
+        <div class="layui-form-item layui-form-text">
+            <textarea id="warn-http" class="layui-textarea" readonly="readonly"
+                placeholder="接口出错了？可能加载比较慢，请稍等。实在不行接口估计就是寄了吧233"></textarea>
+        </div>
+    </div>
+</body>

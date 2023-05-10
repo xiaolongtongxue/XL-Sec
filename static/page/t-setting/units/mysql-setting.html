@@ -1,0 +1,74 @@
+<style>
+    .layui-form-item .layui-input-company {
+        width: auto;
+        padding-right: 10px;
+        line-height: 38px;
+    }
+</style>
+<script src="/js/for_page/t-setting/units/test-setting-mysql.js"></script>
+
+<div class="layuimini-container layuimini-page-anim">
+    <div class="layuimini-main">
+        <form>
+
+            <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+                <legend>MySQL配置相关</legend>
+            </fieldset>
+
+            <!-- <div class="layui-form layuimini-form"> -->
+            <div class="layui-form-item">
+                <label class="layui-form-label required">HOST地址</label>
+                <div class="layui-input-block">
+                    <input id="host-mysql" type="text" name="host-mysql" lay-verify="required"
+                        lay-reqtext="MySQL HOST地址不能为空" placeholder="请输入mysql设备地址" class="layui-input">
+                    <tip>填写对应的域名或内网地址，例如：10.0.1.36。</tip>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">端口号</label>
+                <div class="layui-input-block">
+                    <input id="port-mysql" type="text" name="port-mysql" lay-verify="number" lay-reqtext="端口默认为3306"
+                        placeholder="请输入MySQL服务的开放端口" class="layui-input">
+                    <tip>填写MySQL服务对应的端口号，默认为3306。</tip>
+                </div>
+            </div>
+            <div class="layui-form-item required">
+                <label class="layui-form-label">用户</label>
+                <div class="layui-input-inline" style="width: 80px;">
+                    <input id="user-mysql" type="text" name="username-mysql" lay-verify="required" class="layui-input">
+                </div>
+                <!-- <div class="layui-input-inline layui-input-company">分钟</div> -->
+                <div class="layui-form-mid layui-word-aux">MySQL服务的使用用户</div>
+            </div>
+            <div class="layui-form-item required">
+                <label class="layui-form-label">密码</label>
+                <div class="layui-input-inline">
+                    <input id="passwd-mysql" type="password" name="passwd-mysql" lay-verify="required"
+                        class="layui-input">
+                </div>
+                <!-- <div class="layui-input-inline layui-input-company">KB</div> -->
+                <div class="layui-form-mid layui-word-aux">请输入对应的用户密码</div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button id="mysql-setting-submit" class="layui-btn" type="button" lay-submit=""
+                        lay-filter="article-submit">立即提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    layui.use(['form'], function () {
+        var form = layui.form, layer = layui.layer;
+        form.render();
+        form.on('submit(setting)', function (data) {
+            parent.layer.alert(JSON.stringify(data.field), {
+                title: '最终的提交信息'
+            });
+            return false;
+        });
+
+    });
+</script>

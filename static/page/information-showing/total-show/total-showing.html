@@ -1,0 +1,107 @@
+<head>
+    <style>
+        .top-panel {
+            border: 1px solid #eceff9;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .top-panel>.layui-card-body {
+            height: 60px;
+        }
+
+        .top-panel-number {
+            line-height: 60px;
+            font-size: 30px;
+            border-right: 1px solid #eceff9;
+        }
+
+        .top-panel-tips {
+            line-height: 30px;
+            font-size: 12px
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="/css/building/switch.css" />
+    <script src="/js/lay-module/echarts/echarts.js"></script>
+    <script src="/js/lay-module/echarts/echartsTheme.js"></script>
+    <script src="/js/util_function_extend/nearlytime.js"></script>
+    <script src="/js/for_page/information-welcome/total-show/welcome.js"></script>
+    <script src="/js/for_page/waf-check/switch/total-switch.js"></script>
+</head>
+
+<body>
+    <div class="layuimini-container layuimini-page-anim">
+        <div class="layuimini-main welcome">
+            <br>
+            <h1 style="text-align:left;">&ensp;攻击防御数据总览</h1><br>
+            <div class="layui-row layui-col-space5">
+                <div class="layui-col-xs10 layui-col-md2">
+                    <div class="layui-card top-panel">
+                        <div class="layui-card-header">WAF已稳定运行</div>
+                        <div id="save-days" class="top-panel-number">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-xs10 layui-col-md2">
+                    <div class="layui-card top-panel">
+                        <div class="layui-card-header">今日攻击拦截</div>
+                        <div id="lan-times" class="top-panel-number">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-xs10 layui-col-md3">
+                    <div class="layui-card top-panel">
+                        <div class="layui-card-header">累计攻击拦截</div>
+                        <div id="total-times" class="top-panel-number">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-xs10 layui-col-md2">
+                    <div class="layui-card top-panel">
+                        <div class="layui-card-header"><strong>当前系统状态</strong></div>
+                        <div id="system-status" class="top-panel-number">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-xs10 layui-col-md2">
+                    <div class="layui-card top-panel">
+                        <div class="layui-card-header"><strong>当前时间</strong></div>
+                        <div id="now-times" class="top-panel-number"></div>
+                    </div>
+                </div>
+            </div>
+            <form id="total-form-switch" action="">
+                <fieldset class="layui-elem-field layui-field-title" style="margin-bottom: 0;">
+                    <legend><strong>全系统防护总开关</strong></legend>
+                </fieldset>
+                <div class="layui-form-item" style="margin-top: 0 !important;">
+                    <label class="layui-form-label" style="width: auto;">&ensp;</label>
+                    <div class="switch" style="margin-bottom: 0;">
+                        <input class="switch-checkbox" id="total-switch" type="checkbox">
+                        <label class="switch-label" for="total-switch">
+                            <span class="switch-inner" data-on="ON" data-off="OFF"></span>
+                            <span class="switch-switch"></span>
+                        </label>
+                    </div>
+                </div>
+            </form>
+            <!-- <h3>&ensp;&ensp;近八日攻击数据统计</h3> -->
+            <fieldset class="layui-elem-field layui-field-title" style="margin-bottom: 0;">
+                <legend><strong>近八日攻击数据统计：</strong><a id="refresh-echarts">点击刷新数据</a></legend>
+            </fieldset>
+            <div class="layui-row layui-col-space15">
+                <div class="layui-col-xs12 layui-col-md9">
+                    <div id="nearly-shows" style="background-color:#ffffff;min-height:400px;padding: 10px"></div>
+                </div>
+                <div class="layui-col-xs2 layui-col-md2">
+                    <h4 style="font-size: 30px;">今日一言</h4>
+                    <hr>
+                    <p style="font-size: 20px;" id="hitokoto">
+                        <a href="#" id="hitokoto_text">:D 获取中...</a>
+                    </p>
+                    <script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto" defer></script>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

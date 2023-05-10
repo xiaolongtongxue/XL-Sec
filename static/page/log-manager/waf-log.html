@@ -1,0 +1,23 @@
+<style>
+    .layui-btn:not(.layui-btn-lg):not(.layui-btn-sm):not(.layui-btn-xs) {
+        height: 36px;
+        line-height: 36px;
+        padding: 0 8px;
+    }
+</style>
+<script src="/js/for_page/log-manager/waf-log.js"></script>
+
+<div class="layuimini-container layuimini-page-anim">
+    <div class="layuimini-main">
+        <script type="text/html" id="toolbar">
+            <div class="layui-btn-container">
+                <div class="layui-input-inline">
+                    <h3>WAF操作记录 &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</h3>
+                </div>
+                <button class="layui-btn layui-btn-normal" lay-event="refresh"> 刷新所有 </button>
+                <button class="layui-btn layui-btn-danger" lay-event="delete"> 删除全部 </button>
+            </div>
+        </script>
+        <table class="layui-hide" id="table-waf-log" lay-filter="table-waf-log"></table>
+    </div>
+</div>

@@ -1,0 +1,38 @@
+<style>
+    .layui-form-item .layui-input-company {
+        width: auto;
+        padding-right: 10px;
+        line-height: 38px;
+    }
+</style>
+<script src="/js/for_page/information-welcome/reporting.js"></script>
+<div class="layuimini-container layuimini-page-anim">
+    <div class="layuimini-main">
+        <form class="layui-form">
+            <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+                <legend>监控防护报告生成导出</legend>
+            </fieldset>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: auto;">时间范围</label>
+                <div class="layui-input-block">
+                    <input type="text" id="time" name="time" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: auto;">下载格式</label>
+                <div class="layui-input-block" style="width: 20ex;">
+                    <select name="type">
+                        <option value="html" selected>HTML</option>
+                        <option value="json">JSON</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button id="report-get-submit" class="layui-btn" type="button" lay-submit=""
+                        lay-filter="article-submit">立即导出</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

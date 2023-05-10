@@ -1,0 +1,27 @@
+<style>
+    .layui-form-item .layui-input-company {
+        width: auto;
+        padding-right: 10px;
+        line-height: 38px;
+    }
+</style>
+<script src="/js/for_page/waf-check/upload-rules.js"></script>
+<div class="layuimini-container layuimini-page-anim">
+    <div class="layuimini-main">
+        <form id="upload-form" enctype="multipart/form-data">
+            <li class="form">
+                <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+                    <legend>规则包请在这里上传</legend>
+                    <div class="input-group" style="width: 40%;margin-left: 1%">
+                        <input type="text" class="form-control" value="请点击这里选择文件，不要死扣右边的按钮哦！" id="path" onclick="$('#file').click()" readonly />
+                        <span id="upload" class="btn btn-info input-group-addon">
+                            <i class="glyphicon glyphicon-cloud-upload"></i>
+                            上传
+                        </span>
+                    </div>
+                    <input type="file" class="form-control" id="file" style="display:none" />
+                </fieldset>
+            </li>
+        </form>
+    </div>
+</div>

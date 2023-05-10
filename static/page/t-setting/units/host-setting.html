@@ -1,0 +1,44 @@
+<style>
+    .layui-form-item .layui-input-company {
+        width: auto;
+        padding-right: 10px;
+        line-height: 38px;
+    }
+</style>
+<script src="/js/for_page/t-setting/units/setting-host.js"></script>
+
+<div class="layuimini-container layuimini-page-anim">
+    <div class="layuimini-main">
+        <form>
+            <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+                <legend>设备HOST配置</legend>
+            </fieldset>
+            <div class="layui-form-item layui-form-text">
+                <textarea placeholder="请按照以下格式输入内容：
+    1.1.1.1 test.com
+    2.2.2.2 iiii.xxx
+                    " id="host-setting-msg" name="host-setting-msg" class="layui-textarea"></textarea>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button id="host-setting-submit" class="layui-btn" type="button" lay-submit=""
+                        lay-filter="article-submit">立即提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    layui.use(['form'], function () {
+        var form = layui.form, layer = layui.layer;
+        form.render();
+        form.on('submit(setting)', function (data) {
+            parent.layer.alert(JSON.stringify(data.field), {
+                title: '最终的提交信息'
+            });
+            return false;
+        });
+
+    });
+</script>
