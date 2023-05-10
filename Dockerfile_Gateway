@@ -1,0 +1,6 @@
+FROM openresty/openresty
+RUN mkdir /lua/
+RUN mkdir /conf
+COPY static /usr/local/openresty/nginx/html/
+COPY lua /lua
+COPY nginx.conf/for_docker.conf /usr/local/openresty/nginx/conf/nginx.conf

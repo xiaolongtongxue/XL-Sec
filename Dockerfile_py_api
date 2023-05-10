@@ -1,0 +1,15 @@
+FROM python:3.7
+ARG app_path=/www/commonds/python_files/app/
+RUN sed -i 's/deb.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list && apt -y update && apt -y install iputils-ping net-tools curl traceroute
+# RUN pip install pip -U
+RUN pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+RUN pip install pillow==5.2
+RUN pip install mysql-connector-python==8.0.23
+RUN pip install flask
+RUN pip install redis
+RUN pip install PyEmail
+RUN pip install gevent
+COPY api /usr/src/app/
+WORKDIR /usr/src/app
+ENV FLASK_APP=main.py
+CMD ["python", "main.py"]
