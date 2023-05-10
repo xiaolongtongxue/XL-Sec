@@ -1,0 +1,127 @@
+<style>
+    .layui-form-item .layui-input-company {
+        width: auto;
+        padding-right: 10px;
+        line-height: 38px;
+    }
+</style>
+<script>
+    $.ajaxSetup({xhrFields: {withCredentials: true}});
+    $(function () {
+        onkeydown = "if(event.keyCode==9){event.keyCode=0;event.returnValue=false;}";
+        $.ajax({
+            url: url_rules_table_info_cc_setting,
+            dataType: "json",
+            processData: false,
+            async: true,
+            caches: false,
+            type: "get",
+            success: function (data) {
+                back_login(data);
+                set_value("value", data);
+                document.getElementById("tips").innerHTML = "意思是在 周期时间 " + data.cycle + " 秒内，访问次数超过访问频率 " + data.rate + " 次，会对该 IP 进行封锁时间为 " + data['lock-time'] + "秒的封禁（若设置为0或空则直接永久封禁），在30分钟内如果某个IP被封禁 " + data['tolerate-times'] + " 次，将被直接永久封禁（ps：永久封禁只能手动解封）";
+            },
+            error: function (e) {
+                console.log(e);
+                layer.msg('系统出错了，请检查接口同源策略或咨询开发人员ಠ_ರೃ', {icon: 5});
+            }
+        });
+        $("#cc-setting-submit").click(function () {
+            var access = true, txt = "";
+            var formObject = {};
+            var formArray = $("form").serializeArray();
+            $.each(formArray, function (i, item) {
+                if ($("#" + item.name).attr("lay-verify") == "required") {
+                    if (item.value == "" || item.value == NaN) {
+                        access = false;
+                        txt += $("#" + item.name).attr("lay-reqtext");
+                    }
+                }
+                formObject[item.name] = item.value;
+            });
+            if (access) {
+                $.ajax({
+                    url: url_rules_table_info_cc_setting,
+                    type: "post",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(formObject),
+                    dataType: "json",
+                    success: function (data) {
+                        back_login(data);
+                        if (data.do == true) {
+                            layer.msg("修改成功", {icon: 1});
+                        }else {
+                            layer.msg("修改失败，错误提示：" + data.msg, {icon: 5});
+                        }
+                    },
+                    error: function (e) {
+                        console.log(e);
+                        document.getElementById('alert-msg').innerHTML = "提交失败";
+                    }
+                });
+            } else {
+                layer.msg(txt,{icon:5});
+            }
+        });
+    });
+
+    function set_value(attribute, data) {
+        for (item in data) {
+            $("#" + item).attr(attribute, data[item]);
+        }
+    }
+</script>
+
+<body>
+<div class="layuimini-container layuimini-page-anim">
+    <div class="layuimini-main">
+        <form>
+            <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+                <legend>CC配置</legend>
+            </fieldset>
+            <div class="layui-form-item">
+                <label class="layui-form-label required">周期时间<br>(单位:秒)</label>
+                <div class="layui-input-block">
+                    <input id="cycle" type="text" name="cycle" lay-verify="required" lay-reqtext="周期时间"
+                           placeholder="周期时间" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label required">访问频率<br>(单位:次)</label>
+                <div class="layui-input-block">
+                    <input id="rate" type="text" name="rate" lay-verify="required" lay-reqtext="访问频率"
+                           placeholder="访问频率" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label required">封锁时间<br>(单位:秒)</label>
+                <div class="layui-input-block">
+                    <input id="lock-time" type="text" name="lock-time" lay-verify="required" lay-reqtext="初始封禁的时间"
+                           placeholder="初始封禁的时间" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label required">容忍次数<br>(单位:次)</label>
+                <div class="layui-input-block">
+                    <input id="tolerate-times" type="text" name="tolerate-times" lay-reqtext="10min内封禁次数超过该数字将自动封禁"
+                           placeholder="10min内封禁次数超过该数字将自动封禁" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block" id="tips">
+                </div>
+
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button id="cc-setting-submit" class="layui-btn" type="button" lay-submit=""
+                            lay-filter="article-submit">立即提交
+                    </button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+        </form>
+        <div id="alert-msg"></div>
+    </div>
+</div>
+</body>

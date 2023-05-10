@@ -1,0 +1,271 @@
+<head>
+    <style>
+        .layui-form-item .layui-input-company {
+            width: auto;
+            padding-right: 10px;
+            line-height: 38px;
+        }
+
+        .new {
+            margin-left: 20ex;
+        }
+    </style>
+    <script>
+        let nickname = allVars.events;
+        const url_get_setting = url_rules_table_injections_get_settings + nickname + "/";
+        const url_set_setting = url_rules_table_injections_set_settings + nickname + "/";
+        const url_new_setting = url_rules_table_injections_new_settings + nickname + "/";
+        const url_del_setting = url_rules_table_injections_del_settings + nickname + "/";
+        var edit_access = true;
+        var edit_id = new String();
+        $(function () {
+            $("#title1").text(nickname.toUpperCase());
+            onkeydown = "if(event.keyCode==9){event.keyCode=0;event.returnValue=false;}";
+            $.ajaxSetup({xhrFields: {withCredentials: true}});
+            for_news();
+            getold();
+        });
+
+        function for_news() {
+            $("#submit-new").click(function () {
+                var formObject = {
+                    "new-re": $("#new-re-rules").val(),
+                    "expl": $("#explanation").val()
+                };
+                if (formObject['new-re'] !== "") {
+                    $.ajax({
+                        url: url_new_setting,
+                        type: "post",
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify(formObject),
+                        dataType: "json",
+                        success: function (data) {
+                            back_login(data);
+                            if (data.do) {
+                                toastr.success("添加成功，后续需要手动激活", {icon: 1});
+                                layui.use(['table'], function () {
+                                    layui.table.reload('munu-table-not-using');
+                                    $("#new-re-rules").val('');
+                                    $("#explanation").val('');
+                                });
+                            } else {
+                                layer.msg(data.msg, {icon: 2});
+                            }
+                        },
+                        error: function (e) {
+                            console.log(e);
+                        }
+                    });
+                } else {
+                    toastr.warning('提示内容不能为空');
+                }
+            });
+        }
+
+        function getold() {
+            to_table("munu-table-using", '1');
+            to_table("munu-table-not-using", '0');
+        }
+
+        function to_table(id, use_num) {
+            var eve = String();
+            if (use_num === '1') {
+                eve = "关闭";
+            } else if (use_num === '0') {
+                eve = "打开";
+            } else {
+                return;
+            }
+            layui.use(['table'], function () {
+                var table = layui.table;
+                table.render({
+                    cellMinWidth: 'auto',
+                    treeColIndex: 1,
+                    treeSpid: -1,
+                    elem: '#' + id,
+                    url: url_get_setting + "?use=" + use_num,
+                    cols: [[
+                        {
+                            field: 're-rules', width: '60%', title: '正则条件', templet: function (d) {
+                                return '<input id="' + d.id + '" name="" value="' + d['re-rules'] + '" style="width:100%;border:0;height:95%;" readonly="readonly">';
+                            }
+                        }, {
+                            field: 'expl', width: '18%', title: '规则说明', templet: function (d) {
+                                return '<input id="' + d.id + '--expl" name="" value="' + d['expl'] +
+                                    '" style="width:100%;border:0;height:95%;" readonly="readonly">';
+                            }
+                        }, {
+                            field: 'check', width: '23%', title: '规则开关', align: 'center', templet: function (d) {
+                                return '<button type="button" class="layui-btn layui-btn-primary layui-btn-sm layui-btn-warm" ' +
+                                    'lay-event="edit" id="e' + d.id +
+                                    '">编辑</button>' + '&ensp;' +
+                                    '<button type="button" class="layui-btn layui-btn-primary layui-btn-sm layui-btn-normal" ' +
+                                    'lay-event="check" id="c' + d.id +
+                                    '">' + eve + '</button>' + '&ensp;' +
+                                    '<button type="button" class="layui-btn layui-btn-primary layui-btn-sm layui-btn-danger" ' +
+                                    'lay-event="del" id="d' + d.id +
+                                    '">删除</button>';
+                            }
+                        },
+                    ]]
+                });
+                table.on('tool(' + id + ')', function (obj) {
+                    var id_line = obj.data.id;
+                    switch (obj.event) {
+                        case "edit":
+                            if (edit_access) {//初次点击编辑
+                                $("#" + id_line).removeAttr("readonly");
+                                $("#" + id_line + "--expl").removeAttr("readonly");
+                                toastr.success("该行可直接编辑，点击右侧‘提交’即可修改");
+                                $("#e" + id_line).text("提交");
+                                edit_id = id_line;
+                                edit_access = false;
+                            } else {//点击的是保存或者其他按钮编辑
+                                if (id_line == edit_id) {
+                                    $.ajax({
+                                        url: url_set_setting,
+                                        type: "post",
+                                        contentType: "application/json; charset=utf-8",
+                                        data: JSON.stringify({
+                                            "ruid": id_line,
+                                            "new-re": $("#" + id_line).val(),
+                                            "expl": $("#" + id_line + "--expl").val()
+                                        }),
+                                        dataType: "json",
+                                        success: function (data) {
+                                            back_login(data);
+                                            if (data.do) {
+                                                edit_access = true;
+                                                edit_id = String();
+                                                $("#e" + id_line).text("编辑");
+                                                $("#" + id_line).attr("readonly", "readonly");//恢复表单为只读状态
+                                                $("#" + id_line + "--expl").attr("readonly", "readonly");//恢复表单为只读状态
+                                                toastr.success("修改成功");
+                                            } else
+                                                toastr.error(data.msg);
+                                        },
+                                        error: function (e) {
+                                            console.log(e);
+                                            toastr.error("提交失败");
+                                        }
+                                    });
+                                } else
+                                    toastr.info("请先修改完待修改的项目");
+                            }
+                            return;
+                        case "del":
+                            toastr.info("<br><button type='button' id='confirmationButtonYes' class='layui-btn layui-btn-dange layui-btn-sm'>确认</button>&ensp;<button type='button' id='confirmationButtonNo' class='layui-btn layui-btn-primary layui-btn-sm'>取消</button>", '确认删除？', {
+                                closeButton: false,
+                                allowHtml: true,
+                                onShown: function (toast) {
+                                    $("#confirmationButtonYes").click(function () {
+                                        var ruid = obj.data.id;
+                                        var rule = obj.data['re-rules'];
+                                        $.ajax({
+                                            url: url_del_setting,
+                                            type: "post",
+                                            contentType: "application/json; charset=utf-8",
+                                            data: JSON.stringify({"ruid": ruid, "rule": rule}),
+                                            dataType: "json",
+                                            success: function (data) {
+                                                back_login(data);
+                                                if (data.do) {
+                                                    toastr.success('删除成功', {icon: 2});
+                                                    table.reload(id);
+                                                } else {
+                                                    toastr.error(data.msg);
+                                                }
+                                            },
+                                            error: function (e) {
+                                                console.log(e);
+                                                toastr.error("提交失败");
+                                            }
+                                        });
+                                    });
+                                    $("#confirmationButtonNo").click(function () {
+                                        console.log('Stop Delete');
+                                    });
+                                }
+                            });
+
+                            return;
+                        case "check":
+                            $.ajax({
+                                url: url_set_setting + "?ruid=" + id_line,
+                                type: "get",
+                                contentType: "application/json; charset=utf-8",
+                                dataType: "json",
+                                success: function (data) {
+                                    back_login(data);
+                                    if (data.do) {
+                                        toastr.success('修改成功', {icon: 2});
+                                        layui.table.reload('munu-table-not-using');
+                                        layui.table.reload('munu-table-using');
+                                    } else {
+                                        toastr.error(data.msg);
+                                    }
+                                },
+                                error: function (e) {
+                                    console.log(e);
+                                    toastr.success("提交失败");
+                                }
+                            });
+                            return;
+                        default:
+                            toastr.warning("???");
+                            return;
+                    }
+                });
+            });
+        }
+    </script>
+</head>
+
+<body>
+<div class="layuimini-container layuimini-page-anim">
+    <div class="layuimini-main">
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+            <legend><span id="title1"></span>注入配置</legend>
+        </fieldset>
+        <div class="layui-form-item">
+            <div class="layui-input-block" id="tips">请在了解正则表达式的前提下对以下内容进行编辑配置哦！</div>
+        </div>
+        <fieldset class="layui-elem-field new">
+            <legend>在这里添加新的</legend>
+        </fieldset>
+        <div class="layui-form-item">
+            <div class="layui-col-md6" style="width: 105ex;">
+                <label class="layui-form-label">正则表达式</label>
+                <div class="layui-input-block">
+                    <input type="text" id="new-re-rules" name="new-re-rules" placeholder="请输入校验用正则表达式"
+                           autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-col-md6" style="width: 40ex;">
+                <label class="layui-form-label">注释说明</label>
+                <div class="layui-input-block">
+                    <input type="text" id="explanation" name="explanation" placeholder="请对进行备注说明" autocomplete="off"
+                           class="layui-input">
+                </div>
+            </div>
+            <div class="layui-col-md6" style="width: 14ex;">
+                <button type="button" id="submit-new"
+                        class="layui-btn layui-btn-primary layui-border-black">提交
+                </button>
+            </div>
+        </div>
+        <fieldset class="layui-elem-field new">
+            <legend>已生效</legend>
+        </fieldset>
+        <div>
+            <table id="munu-table-using" class="layui-table" lay-filter="munu-table-using"></table>
+        </div>
+        <fieldset class="layui-elem-field new">
+            <legend>未生效</legend>
+        </fieldset>
+        <div>
+            <table id="munu-table-not-using" class="layui-table" lay-filter="munu-table-not-using"></table>
+        </div>
+    </div>
+</div>
+</body>

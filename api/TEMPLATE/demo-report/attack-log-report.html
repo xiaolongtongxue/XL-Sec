@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>XK-Sec，{{ title }}</title>
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/popper.js/2.9.3/umd/popper.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+    <style>
+        td {
+            width: auto;
+            max-width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+    <h1>{{ title }}</h1>
+    <table class="table table-bordered table-striped table-hover">
+        <thead class="thead-dark">
+        <tr>
+            {% for field in fields %}
+                <td>{{ field }}</td>
+            {% endfor %}
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in data %}
+            <tr>
+                {% for field in item %}
+                    {% if field=="http" %}
+                        <td>
+                            <pre>{{ item[field] }}</pre>
+                        </td>
+                    {% else %}
+                        <td>{{ item[field] }}</td>
+                    {% endif %}
+                {% endfor %}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>
+</body>
+</html>
